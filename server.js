@@ -2,41 +2,58 @@
 
 const express = require('express');
 const line = require('@line/bot-sdk');
+
 const PORT = process.env.PORT || 3000;
 
 const config = {
-    channelSecret: '124ac7f4a826141e83a3125ea43cace7',
-    channelAccessToken: '',
+    channelSecret: '秘密',
+    channelAccessToken: '秘密',
 };
 
 const app = express();
 
 app.post('/webhook', line.middleware(config), (req, res) => {
-    console.log("");
-    console.log("");
-    console.log("");
-    console.log("");
+
     console.log(req.body.events);
-    console.log("");
-    console.log("");
-    console.log("");
     Promise
-      .all(req.body.events.map(handleEvent))
-      .then((result) => res.json(result));
+        .all(req.body.events.map(handleEvent))
+        .then((result) => res.json(result));
 });
 
 const client = new line.Client(config);
 
 function handleEvent(event) {
-  if (event.type !== 'message' || event.message.type !== 'text') {
-    return Promise.resolve(null);
-  }
+    if (event.type == 'message' && event.message.type == 'text') {
+        let mes =  event.message.text;
 
-  return client.replyMessage(event.replyToken, {
-    type: 'text',
-    text: event.message.text //実際に返信の言葉を入れる箇所
-  });
+
+        return client.replyMessage(event.replyToken, {
+            type: 'text',
+            text: mes
+        });
+        
+    }
+
+    if( event.type == 'message' && event.message.type  == 'location'){
+        var lat = event.message.latitude;
+        var lng = event.message.longitude;
+        
+        return client.replyMessage(event.replyToken, {
+            type: 'text',
+            text :"https://www.google.com/maps/d/embed?mid=1nfJ4qICIxHyiVMtdFl2Un8iSBXtCVT2I&ll=" +
+            lat +
+            "," +
+            lng +
+            "&z=18",
+        });
+    }
+
+    return Promise.resolve(null);
+    
+
+
 }
+
 
 app.listen(PORT);
 console.log(`Server running at ${PORT}`);
