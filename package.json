@@ -1,0 +1,24 @@
+{
+  "name": "smokingbot",
+  "version": "1.0.0",
+  "description": "当初の目的だったlinebot製作に入ります。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oneokrock256/smokingbot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oneokrock256/smokingbot/issues"
+  },
+  "homepage": "https://github.com/oneokrock256/smokingbot#readme",
+  "dependencies": {
+    "@line/bot-sdk": "^6.4.0",
+    "express": "^4.16.4"
+  }
+}
