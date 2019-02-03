@@ -6,8 +6,8 @@ const line = require('@line/bot-sdk');
 const PORT = process.env.PORT || 3000;
 
 const config = {
-    channelSecret: '秘密',
-    channelAccessToken: '秘密',
+    channelSecret: process.env["ch_secret"],
+    channelAccessToken: process.env["ch_access_token"],
 };
 
 const app = express();
